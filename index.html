@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="Logo rasm/684287458_18100517557880128_580481360771911855_n.jpg" type="image/x-icon">
 <title>Guliston Choyxona</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -44,14 +43,12 @@ nav{background:var(--green);padding:0 40px;display:flex;align-items:center;justi
 .tab.active,.tab:hover{background:var(--green);color:#fff}
 .category{display:none;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
 .category.active{display:grid}
-.menu-card{background:#fff;border:1px solid #e8e0d0;border-radius:12px;padding:20px;display:flex;justify-content:space-between;align-items:center;transition:.2s}
-.menu-card:hover{border-color:var(--gold);transform:translateY(-2px)}
-.menu-card-left h4{font-size:16px;font-weight:700;color:var(--green);margin-bottom:4px}
-.menu-card-left p{font-size:13px;color:#999}
-.menu-card-right{text-align:right}
-.price{font-size:17px;font-weight:700;color:var(--gold)}
-.price small{font-size:12px;color:#bbb;display:block}
-.add-btn{background:var(--green);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:22px;cursor:pointer;margin-top:8px;transition:.2s;display:flex;align-items:center;justify-content:center}
+.menu-card{background:#fff;border:1px solid #e8e0d0;border-radius:12px;overflow:hidden;transition:.2s}
+.menu-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,0.1)}
+.menu-card-img{width:100%;height:180px;object-fit:cover}
+.menu-card-body{padding:16px;display:flex;justify-content:space-between;align-items:center}
+.menu-card-left h4{font-size:15px;font-weight:700;color:var(--green)}
+.add-btn{background:var(--green);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:22px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .add-btn:hover{background:#7ec84a}
 .cart-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:300;opacity:0;pointer-events:none;transition:.3s}
 .cart-overlay.open{opacity:1;pointer-events:all}
@@ -65,19 +62,18 @@ nav{background:var(--green);padding:0 40px;display:flex;align-items:center;justi
 .cart-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid #f0ebe0}
 .cart-item:last-child{border-bottom:none}
 .cart-item-name{font-weight:700;font-size:14px;color:#1a1a1a;margin-bottom:4px}
-.cart-item-price{font-size:13px;color:var(--gold)}
+.cart-item-qty{font-size:13px;color:var(--gold)}
 .cart-item-right{display:flex;align-items:center;gap:8px}
 .qty-btn{background:var(--green);color:#fff;border:none;width:28px;height:28px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .qty-num{font-weight:700;font-size:15px;min-width:20px;text-align:center}
 .remove-item{background:none;border:none;color:#e74c3c;font-size:20px;cursor:pointer;line-height:1;margin-left:4px}
 .cart-footer{padding:20px 24px;border-top:2px solid #f0ebe0;background:#fafaf8}
-.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.cart-total-row span{font-size:16px;color:#888}
-.cart-total-row strong{font-size:22px;color:var(--green);font-family:'Playfair Display',serif}
+.submit-btn{width:100%;padding:15px;background:#7ec84a;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;transition:.2s}
+.submit-btn:hover{background:#5fa332}
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:16px;width:100%;max-width:480px;overflow:hidden}
-.modal-header{background:var(--green);padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:480px;overflow:hidden;max-height:90vh;overflow-y:auto}
+.modal-header{background:var(--green);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
 .modal-header h3{color:#7ec84a;font-family:'Playfair Display',serif;font-size:20px}
 .modal-body{padding:24px}
 .form-group{margin-bottom:16px}
@@ -86,9 +82,11 @@ nav{background:var(--green);padding:0 40px;display:flex;align-items:center;justi
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green)}
 .order-summary{background:var(--light);border-radius:8px;padding:14px;margin-bottom:16px;font-size:13px;max-height:150px;overflow-y:auto}
 .order-summary-item{display:flex;justify-content:space-between;padding:3px 0;color:#555}
-.order-summary-total{display:flex;justify-content:space-between;font-weight:700;color:var(--green);border-top:1px solid #ddd;padding-top:8px;margin-top:8px}
-.submit-btn{width:100%;padding:15px;background:#7ec84a;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;transition:.2s}
-.submit-btn:hover{background:#5fa332}
+.order-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-tg{background:#229ED9;color:#fff;border:none;padding:14px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;transition:.2s}
+.btn-tg:hover{background:#1a8abf}
+.btn-call{background:var(--green);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;transition:.2s}
+.btn-call:hover{background:#7ec84a}
 .contact-section{background:var(--green);padding:70px 40px;color:#fff}
 .contact-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .contact-info h2{font-family:'Playfair Display',serif;font-size:34px;color:#7ec84a;margin-bottom:24px}
@@ -102,11 +100,14 @@ footer span{color:#7ec84a}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--green);color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;z-index:999;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:700px){
-  .hero h1{font-size:32px}
+  .hero h1{font-size:30px}
   .nav-links{display:none}
   .contact-inner{grid-template-columns:1fr}
-  .info-band{gap:20px}
+  .info-band{gap:16px}
   .cart-sidebar{width:100%;right:-100%}
+  .order-btns{grid-template-columns:1fr}
+  nav{padding:0 16px}
+  .section{padding:40px 16px}
 }
 </style>
 </head>
@@ -132,7 +133,7 @@ footer span{color:#7ec84a}
 <section class="hero">
   <div class="hero-badge">SINCE 2011</div>
   <h1>Guliston <span>Choyxona</span>ga<br>Xush Kelibsiz!</h1>
-  <p>Xorazm viloyati, Xonqa va Ergach tumanlari chegarasi</p>
+  <p>Xorazm viloyati, Urganch va Xonqa tumanlari chegarasi</p>
   <p class="hero-hours">⏰ Ish vaqti: 09:00 — 22:00</p>
   <div class="hero-btns">
     <button class="btn-primary" onclick="openCart()">🛒 Buyurtma berish</button>
@@ -141,7 +142,7 @@ footer span{color:#7ec84a}
 </section>
 
 <div class="info-band">
-  <div class="info-item">📍 Xonqa-Ergach chegarasi</div>
+  <div class="info-item">📍 Urganch-Xonqa chegarasi</div>
   <div class="info-item">⏰ 09:00 — 22:00</div>
   <div class="info-item">📞 (93) 518-73-63</div>
   <div class="info-item">🌿 Tabiiy muhit</div>
@@ -154,34 +155,64 @@ footer span{color:#7ec84a}
       <p>Eng mazali va sifatli taomlar</p>
     </div>
     <div class="menu-tabs">
-      <div class="tab active" onclick="showCat('kabob',this)">🥩 Kabob & Go'sht</div>
-      <div class="tab" onclick="showCat('baliq',this)">🐟 Baliq</div>
+      <div class="tab active" onclick="showCat('shashlik',this)">🥩 Shashlik</div>
+      <div class="tab" onclick="showCat('qozon',this)">🫕 Qozon Kabob</div>
       <div class="tab" onclick="showCat('somsa',this)">🥟 Somsa</div>
-      <div class="tab" onclick="showCat('ichimlik',this)">🥤 Ichimliklar</div>
+      <div class="tab" onclick="showCat('baliq',this)">🐟 Baliq</div>
+      <div class="tab" onclick="showCat('salat',this)">🥗 Salat</div>
+      <div class="tab" onclick="showCat('steak',this)">🥩 Steak</div>
+      <div class="tab" onclick="showCat('suv',this)">🥤 Ichimliklar</div>
     </div>
 
-    <div id="kabob" class="category active">
-      <div class="menu-card"><div class="menu-card-left"><h4>Steak</h4><p>1 kg</p></div><div class="menu-card-right"><div class="price">150 000 <small>so'm/kg</small></div><button class="add-btn" onclick="addToCart('Steak (1kg)',150000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Shashlik ijjon</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">15 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Shashlik ijjon',15000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Mol qusoch</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">20 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Mol qusoch',20000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Qo'y qusoch</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">22 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Qo\'y qusoch',22000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Qanot</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">24 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Qanot',24000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>G'jdivon</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">20 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('G\'jdivon',20000)">+</button></div></div>
+    <div id="shashlik" class="category active">
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/Gijdivon.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>G'ijduvon shashlik</h4></div><button class="add-btn" onclick="addToCart('Gijduvon shashlik')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/Ijjon shashlik.webp  " alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Ijjon shashlik</h4></div><button class="add-btn" onclick="addToCart('Ijjon shashlik')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/mol qusqavoy.jfif" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Mol Kuskovoy</h4></div><button class="add-btn" onclick="addToCart('Mol Kuskovoy')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/qoy qusqavoy.webp" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Qo'y Kuskovoy</h4></div><button class="add-btn" onclick="addToCart('Qoy Kuskovoy')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/jigar.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Jigar shashlik</h4></div><button class="add-btn" onclick="addToCart('Jigar shashlik')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/tovuq shashlik.jfif" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Tovuq shashlik</h4></div><button class="add-btn" onclick="addToCart('Tovuq shashlik')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/Qanoat sashlik.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Qanot shashlik</h4></div><button class="add-btn" onclick="addToCart('Qanot shashlik')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/mol qiyma.webp" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Mol qiymasi</h4></div><button class="add-btn" onclick="addToCart('Mol qiymasi')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Shashlik/qoy qiyma.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Qo'y qiymasi</h4></div><button class="add-btn" onclick="addToCart('Qoy qiymasi')">+</button></div></div>
     </div>
 
-    <div id="baliq" class="category">
-      <div class="menu-card"><div class="menu-card-left"><h4>Sazan baliq</h4><p>1 kg</p></div><div class="menu-card-right"><div class="price">75 000 <small>so'm/kg</small></div><button class="add-btn" onclick="addToCart('Sazan baliq (1kg)',75000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Pyostr baliq</h4><p>1 kg</p></div><div class="menu-card-right"><div class="price">75 000 <small>so'm/kg</small></div><button class="add-btn" onclick="addToCart('Pyostr baliq (1kg)',75000)">+</button></div></div>
+    <div id="qozon" class="category">
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Qozon kabob/qozon-kabob.png" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Mol go'shtidan qozon kabob</h4></div><button class="add-btn" onclick="addToCart('Mol qozon kabob')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Qozon kabob/qoy qazon kabob.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Qo'y go'shtidan qozon kabob</h4></div><button class="add-btn" onclick="addToCart('Qoy qozon kabob')">+</button></div></div>
     </div>
 
     <div id="somsa" class="category">
-      <div class="menu-card"><div class="menu-card-left"><h4>Somsa</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">13 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Somsa',13000)">+</button></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Tandir somsa</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">15 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Tandir somsa',15000)">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Somsa_gomma/somsa.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Tandir somsa</h4></div><button class="add-btn" onclick="addToCart('Tandir somsa')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Somsa_gomma/gumma.jfif" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Tandir go'mma</h4></div><button class="add-btn" onclick="addToCart('Tandir gomma')">+</button></div></div>
     </div>
 
-    <div id="ichimlik" class="category">
-      <div class="menu-card"><div class="menu-card-left"><h4>Asorti (Cola/Fanta/Sprite)</h4><p>1 dona</p></div><div class="menu-card-right"><div class="price">— <small>narx so'rang</small></div></div></div>
-      <div class="menu-card"><div class="menu-card-left"><h4>Toshkent (2 ta)</h4><p>2 dona</p></div><div class="menu-card-right"><div class="price">70 000 <small>so'm</small></div><button class="add-btn" onclick="addToCart('Toshkent x2',70000)">+</button></div></div>
+    <div id="baliq" class="category">
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Baliq/Pyostri.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Pyostri baliq</h4></div><button class="add-btn" onclick="addToCart('Pyostri baliq')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Baliq/sazan.webp" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Sazan baliq</h4></div><button class="add-btn" onclick="addToCart('Sazan baliq')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Baliq/setka baliq.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Setka baliq</h4></div><button class="add-btn" onclick="addToCart('Setka baliq')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Baliq/dimlama.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Dimlama baliq</h4></div><button class="add-btn" onclick="addToCart('Dimlama baliq')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Baliq/Qovurilgan bali.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Qovurma baliq</h4></div><button class="add-btn" onclick="addToCart('Qovurma baliq')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Baliq/baliq shorva.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Baliq sho'rva</h4></div><button class="add-btn" onclick="addToCart('Baliq shorva')">+</button></div></div>
+    </div>
+
+    <div id="salat" class="category">
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/salat/achchiqkuchuk.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Achchiq-chuchuk</h4></div><button class="add-btn" onclick="addToCart('Achchiq-chuchuk')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/salat/sveji salat.jfif" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Sveji salat</h4></div><button class="add-btn" onclick="addToCart('Sveji salat')">+</button></div></div>
+    </div>
+
+    <div id="steak" class="category">
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Steak_kabob/steak.jpg" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Steak</h4></div><button class="add-btn" onclick="addToCart('Steak')">+</button></div></div>
+      <div class="menu-card"><img class="menu-card-img" src="Rasm/Steak_kabob/kabob.webp" alt=""><div class="menu-card-body"><div class="menu-card-left"><h4>Kabob</h4></div><button class="add-btn" onclick="addToCart('Kabob')">+</button></div></div>
+    </div>
+
+    <div id="suv" class="category">
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>💧 Oddiy suv</h4></div><button class="add-btn" onclick="addToCart('Oddiy suv')">+</button></div></div>
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>🫧 Gazli suv</h4></div><button class="add-btn" onclick="addToCart('Gazli suv')">+</button></div></div>
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>🥤 Cola</h4></div><button class="add-btn" onclick="addToCart('Cola')">+</button></div></div>
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>🥤 Fanta</h4></div><button class="add-btn" onclick="addToCart('Fanta')">+</button></div></div>
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>🥤 Sprite</h4></div><button class="add-btn" onclick="addToCart('Sprite')">+</button></div></div>
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>🍵 Toshkent</h4></div><button class="add-btn" onclick="addToCart('Toshkent')">+</button></div></div>
+      <div class="menu-card"><div class="menu-card-body" style="padding:20px"><div class="menu-card-left"><h4>🍵 Choy</h4></div><button class="add-btn" onclick="addToCart('Choy')">+</button></div></div>
     </div>
   </div>
 </section>
@@ -196,10 +227,6 @@ footer span{color:#7ec84a}
     <div class="cart-empty-msg">Savat bo'sh.<br>Menyudan taom tanlang!</div>
   </div>
   <div class="cart-footer">
-    <div class="cart-total-row">
-      <span>Jami:</span>
-      <strong id="cartTotal">0 so'm</strong>
-    </div>
     <button class="submit-btn" onclick="openOrderModal()">📋 Buyurtma berish</button>
   </div>
 </div>
@@ -223,15 +250,19 @@ footer span{color:#7ec84a}
       <div class="form-group">
         <label>Buyurtma turi</label>
         <select id="ftype">
+          <option value="joy_band">Joy band qilish</option>
           <option value="olib_ketish">Olib ketish</option>
-          <option value="stol_band">Stol band qilish</option>
         </select>
       </div>
       <div class="form-group">
         <label>Izoh</label>
         <textarea id="fnote" rows="2" placeholder="Maxsus xohish..."></textarea>
       </div>
-      <button class="submit-btn" onclick="submitOrder()">📲 WhatsApp orqali yuborish</button>
+      <p style="text-align:center;color:#888;font-size:13px;margin-bottom:16px">Quyidagi usullardan birini tanlang:</p>
+      <div class="order-btns">
+        <button class="btn-tg" onclick="sendTelegram()">✈️ Telegram orqali</button>
+        <button class="btn-call" onclick="callUs()">📞 Qo'ng'iroq qilish</button>
+      </div>
     </div>
   </div>
 </div>
@@ -242,7 +273,7 @@ footer span{color:#7ec84a}
       <h2>Biz bilan Bog'laning</h2>
       <div class="contact-item">
         <span style="font-size:22px">📍</span>
-        <p><strong>Manzil</strong><br>Xorazm viloyati, Xonqa va Ergach tumanlari chegarasi</p>
+        <p><strong>Manzil</strong><br>Xorazm viloyati, Urganch va Xonqa tumanlari chegarasi</p>
       </div>
       <div class="contact-item">
         <span style="font-size:22px">⏰</span>
@@ -283,9 +314,9 @@ function showCat(id, el){
   el.classList.add('active');
 }
 
-function addToCart(name, price){
+function addToCart(name){
   let ex = cart.find(i=>i.name===name);
-  if(ex){ ex.qty++; } else { cart.push({name,price,qty:1}); }
+  if(ex){ ex.qty++; } else { cart.push({name,qty:1}); }
   renderCart();
   showToast('✅ ' + name + ' savatga qoshildi!');
   openCart();
@@ -299,24 +330,19 @@ function changeQty(i, delta){
 
 function renderCart(){
   let box = document.getElementById('cartItems');
-  let totalEl = document.getElementById('cartTotal');
   let countEl = document.getElementById('cartCount');
-  let total = 0;
   let count = 0;
   if(cart.length === 0){
     box.innerHTML = '<div class="cart-empty-msg">Savat bosh.<br>Menyudan taom tanlang!</div>';
-    totalEl.textContent = '0 som';
     countEl.textContent = '0';
     return;
   }
   let html = '';
   cart.forEach((item,i)=>{
-    total += item.price * item.qty;
     count += item.qty;
-    html += '<div class="cart-item"><div><div class="cart-item-name">'+item.name+'</div><div class="cart-item-price">'+item.price.toLocaleString()+' som x '+item.qty+'</div></div><div class="cart-item-right"><button class="qty-btn" onclick="changeQty('+i+',-1)">-</button><span class="qty-num">'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+i+',1)">+</button><button class="remove-item" onclick="changeQty('+i+',-99)">x</button></div></div>';
+    html += '<div class="cart-item"><div><div class="cart-item-name">'+item.name+'</div><div class="cart-item-qty">'+item.qty+' dona</div></div><div class="cart-item-right"><button class="qty-btn" onclick="changeQty('+i+',-1)">-</button><span class="qty-num">'+item.qty+'</span><button class="qty-btn" onclick="changeQty('+i+',1)">+</button><button class="remove-item" onclick="changeQty('+i+',-99)">x</button></div></div>';
   });
   box.innerHTML = html;
-  totalEl.textContent = total.toLocaleString() + ' som';
   countEl.textContent = count;
 }
 
@@ -332,37 +358,37 @@ function closeCart(){
 function openOrderModal(){
   if(cart.length===0){ showToast('Avval taom tanlang!'); return; }
   let sum = document.getElementById('orderSummary');
-  let total = 0;
   let html = '';
   cart.forEach(item=>{
-    let s = item.price*item.qty;
-    total += s;
-    html += '<div class="order-summary-item"><span>'+item.name+' x'+item.qty+'</span><span>'+s.toLocaleString()+' som</span></div>';
+    html += '<div class="order-summary-item"><span>'+item.name+'</span><span>'+item.qty+' dona</span></div>';
   });
-  html += '<div class="order-summary-total"><span>Jami:</span><span>'+total.toLocaleString()+' som</span></div>';
   sum.innerHTML = html;
   document.getElementById('modalOverlay').classList.add('open');
 }
+
 function closeModal(){
   document.getElementById('modalOverlay').classList.remove('open');
 }
 
-function submitOrder(){
+function sendTelegram(){
   let name = document.getElementById('fname').value.trim();
   let phone = document.getElementById('fphone').value.trim();
   let type = document.getElementById('ftype').value;
   let note = document.getElementById('fnote').value.trim();
   if(!name||!phone){ showToast('Ism va telefon kiriting!'); return; }
-  let total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  let items = cart.map(i=>i.name+' x'+i.qty+' = '+(i.price*i.qty).toLocaleString()+" som").join('\n');
-  let typeText = type==='olib_ketish'?'Olib ketish':'Stol band qilish';
-  let msg = 'GULISTON CHOYXONA - Yangi buyurtma!\n\nIsm: '+name+'\nTel: '+phone+'\nTuri: '+typeText+'\nIzoh: '+(note||'Yoq')+'\n\nTaomlar:\n'+items+'\n\nJami: '+total.toLocaleString()+' som';
-  window.open('https://wa.me/998935187363?text='+encodeURIComponent(msg),'_blank');
-  cart = [];
-  renderCart();
-  closeModal();
-  closeCart();
-  showToast('Buyurtma yuborildi!');
+  let items = cart.map(i=>i.name+' x'+i.qty).join('\n');
+  let typeText = type==='joy_band'?'Joy band qilish':'Olib ketish';
+  let msg = 'GULISTON CHOYXONA - Yangi buyurtma!\n\nIsm: '+name+'\nTel: '+phone+'\nTuri: '+typeText+'\nIzoh: '+(note||'Yoq')+'\n\nTaomlar:\n'+items;
+  window.open('https://t.me/+998947996366?text='+encodeURIComponent(msg),'_blank'); 
+  cart=[];renderCart();closeModal();closeCart();
+  showToast('Buyurtma Telegram orqali yuborildi!');
+}
+
+function callUs(){
+  let name = document.getElementById('fname').value.trim();
+  let phone = document.getElementById('fphone').value.trim();
+  if(!name||!phone){ showToast('Ism va telefon kiriting!'); return; }
+  window.location.href='tel:+998935187363';
 }
 
 function showToast(msg){
