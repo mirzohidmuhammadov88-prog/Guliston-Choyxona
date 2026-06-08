@@ -379,7 +379,7 @@ function sendTelegram(){
   let items = cart.map(i=>i.name+' x'+i.qty).join('\n');
   let typeText = type==='joy_band'?'Joy band qilish':'Olib ketish';
   let msg = 'GULISTON CHOYXONA - Yangi buyurtma!\n\nIsm: '+name+'\nTel: '+phone+'\nTuri: '+typeText+'\nIzoh: '+(note||'Yoq')+'\n\nTaomlar:\n'+items;
-  window.open('https://t.me/+998947996366?text='+encodeURIComponent(msg),'_blank'); 
+  window.open('https://t.me/+998935187363?text='+encodeURIComponent(msg),'_blank'); 
   cart=[];renderCart();closeModal();closeCart();
   showToast('Buyurtma Telegram orqali yuborildi!');
 }
